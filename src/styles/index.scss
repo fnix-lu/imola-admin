@@ -1,9 +1,5 @@
 @import './variables.scss';
-
-* {
-  margin: 0;
-  padding: 0;
-}
+@import './element-ui.scss';
 
 html {
   font-size: calc(10 / 750 * 100vw); // rem
