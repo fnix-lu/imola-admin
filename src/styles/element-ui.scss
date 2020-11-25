@@ -5,3 +5,8 @@ $--color-primary: $color-primary;
 $--font-path: '~element-ui/lib/theme-chalk/fonts';
 
 @import "~element-ui/packages/theme-chalk/src/index";
+
+.el-submenu .el-menu-item {
+  min-width: initial;
+  padding-right: 20px;
+}
