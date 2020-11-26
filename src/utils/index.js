@@ -51,3 +51,22 @@ export function beforeNow (dateTime) {
   }
   return `${formatNumber(target.getMonth() + 1)}-${formatNumber(target.getDate())}`
 }
+
+/**
+ * 计算浏览器滚动条宽度
+ */
+export function getScrollbarWidth () {
+  const outer = document.createElement('div')
+  outer.style.visibility = 'hidden'
+  outer.style.position = 'absolute'
+  outer.style.top = '-9999px'
+  outer.style.overflow = 'scroll'
+  outer.style.width = '100px'
+  document.body.appendChild(outer)
+
+  const inner = document.createElement('div')
+  inner.style.width = '100%'
+  outer.appendChild(inner)
+
+  return outer.offsetWidth - inner.offsetWidth
+}

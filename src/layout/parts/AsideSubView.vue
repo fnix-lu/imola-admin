@@ -1,29 +1,16 @@
 <template>
   <div :class="['aside-sub-view', { 'fixed': fixed }]">
-    <div class="menu-name">{{ title }}</div>
+    <div class="menu-name">{{ route.meta.title }}</div>
 
     <!-- 二级菜单 -->
     <el-scrollbar class="sub-menu">
-      <el-menu>
-        <el-submenu>
-          <template slot="title">111</template>
-          <el-menu-item>
-            <span>商品</span>
-          </el-menu-item>
-          <el-menu-item>
-            <span>卡券</span>
-          </el-menu-item>
-          <el-menu-item>
-            <span>账号</span>
-          </el-menu-item>
-        </el-submenu>
-
-        <el-menu-item>
-          <span>客户</span>
-        </el-menu-item>
-        <el-menu-item>
-          <span>晒单</span>
-        </el-menu-item>
+      <el-menu :default-active="activeMenuIndex" @select="onMenuSelect">
+        <menu-item
+          v-for="child in route.children"
+          :key="child.path"
+          :route="child"
+          :base-path="route.path"
+        />
       </el-menu>
     </el-scrollbar>
   </div>
@@ -31,9 +18,25 @@
 
 <script>
 export default {
+  components: {
+    MenuItem: () => import('./MenuItem')
+  },
   props: {
-    title: String,
-    fixed: Boolean
+    fixed: Boolean,
+    route: {
+      type: Object,
+      required: true
+    }
+  },
+  computed: {
+    activeMenuIndex () {
+      return this.$route.path
+    }
+  },
+  methods: {
+    onMenuSelect (index) {
+      this.$router.push(index)
+    }
   }
 }
 </script>
@@ -53,8 +56,10 @@ export default {
 
   .menu-name {
     height: 56px;
+    line-height: 56px;
     border-bottom: $border;
     box-sizing: border-box;
+    padding: 0 20px;
   }
 
   .sub-menu {

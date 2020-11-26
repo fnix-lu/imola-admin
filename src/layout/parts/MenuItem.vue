@@ -1,27 +1,42 @@
 <template>
-  <div v-if="!item.hidden">
-    <el-submenu v-if="hasChildren">
-      <menu-item v-for="child in item.children" :key="child.path" :item="child"/>
+  <div v-if="!route.hidden">
+    <el-submenu v-if="hasChildren" :index="routePath">
+      <template slot="title">{{ route.meta.title }}</template>
+      <menu-item
+        v-for="child in route.children"
+        :key="child.path"
+        :route="child"
+        :base-path="routePath"
+      />
     </el-submenu>
 
-    <el-menu-item v-else>
-      <span>{{ item.meta.title }}</span>
+    <el-menu-item v-else :index="routePath">
+      <span>{{ route.meta.title }}</span>
     </el-menu-item>
   </div>
 </template>
 
 <script>
+import path from 'path'
+
 export default {
   name: 'MenuItem',
   props: {
-    item: {
+    route: {
       type: Object,
       required: true
+    },
+    basePath: {
+      type: String,
+      default: ''
     }
   },
   computed: {
     hasChildren () {
-      return Array.isArray(this.item.children) && this.item.children.length > 0
+      return Array.isArray(this.route.children) && this.route.children.length > 0
+    },
+    routePath () {
+      return path.join(this.basePath, this.route.path)
     }
   }
 }

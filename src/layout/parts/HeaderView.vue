@@ -10,5 +10,6 @@
   display: flex;
   align-items: center;
   padding: 0 20px;
+  background: #ffffff;
 }
 </style>

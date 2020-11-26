@@ -33,7 +33,11 @@ export default {
 }
 .lay-main {
   flex: 1;
+  background: #f7f8fa;
 }
 .lay-header {
+}
+.lay-body {
+  padding: 20px;
 }
 </style>

@@ -2,6 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 
 import BasicLayout from '../layout/BasicLayout'
+import RouterView from '../layout/parts/RouterView'
 
 Vue.use(VueRouter)
 
@@ -15,13 +16,33 @@ export const routes = [
   {
     path: '/customer',
     component: BasicLayout,
+    redirect: '/customer/manage',
     meta: {
       title: '客户',
     },
     children: [
       {
         path: 'manage',
-        component: () => import('@/views/customer/manage')
+        component: () => import('@/views/customer/manage'),
+        meta: {
+          title: '客户管理'
+        }
+      },
+      {
+        path: 'aaa',
+        component: RouterView,
+        meta: {
+          title: 'AAA'
+        },
+        children: [
+          {
+            path: '111',
+            component: () => import('@/views/customer/aaa/111'),
+            meta: {
+              title: '111'
+            }
+          }
+        ]
       }
     ]
   },
@@ -29,13 +50,17 @@ export const routes = [
   {
     path: '/order',
     component: BasicLayout,
+    redirect: '/order/manage',
     meta: {
       title: '订单',
     },
     children: [
       {
         path: 'manage',
-        component: () => import('@/views/order/manage')
+        component: () => import('@/views/order/manage'),
+        meta: {
+          title: '订单管理'
+        }
       }
     ]
   },
@@ -43,13 +68,17 @@ export const routes = [
   {
     path: '/activity',
     component: BasicLayout,
+    redirect: '/activity/manage',
     meta: {
       title: '活动',
     },
     children: [
       {
         path: 'manage',
-        component: () => import('@/views/activity/manage')
+        component: () => import('@/views/activity/manage'),
+        meta: {
+          title: '活动管理'
+        }
       }
     ]
   },
@@ -57,13 +86,17 @@ export const routes = [
   {
     path: '/product',
     component: BasicLayout,
+    redirect: '/product/manage',
     meta: {
       title: '商品',
     },
     children: [
       {
         path: 'manage',
-        component: () => import('@/views/product/manage')
+        component: () => import('@/views/product/manage'),
+        meta: {
+          title: '商品管理'
+        }
       }
     ]
   },
@@ -71,13 +104,17 @@ export const routes = [
   {
     path: '/coupon',
     component: BasicLayout,
+    redirect: '/coupon/manage',
     meta: {
       title: '卡券',
     },
     children: [
       {
         path: 'manage',
-        component: () => import('@/views/coupon/manage')
+        component: () => import('@/views/coupon/manage'),
+        meta: {
+          title: '卡券管理'
+        }
       }
     ]
   },
@@ -85,13 +122,17 @@ export const routes = [
   {
     path: '/account',
     component: BasicLayout,
+    redirect: '/account/manage',
     meta: {
       title: '账号',
     },
     children: [
       {
         path: 'manage',
-        component: () => import('@/views/account/manage')
+        component: () => import('@/views/account/manage'),
+        meta: {
+          title: '账号管理'
+        }
       }
     ]
   },
