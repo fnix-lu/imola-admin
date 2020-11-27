@@ -4,7 +4,7 @@
 
     <!-- 二级菜单 -->
     <el-scrollbar class="sub-menu">
-      <el-menu @select="onMenuSelect">
+      <el-menu :default-openeds="submenuIndexList" @select="onMenuSelect">
         <menu-item
           v-for="child in route.children"
           :key="child.path"
@@ -17,6 +17,19 @@
 </template>
 
 <script>
+import path from 'path'
+
+function getSubmenuIndexList (results, routes, basePath) {
+  routes.forEach(route => {
+    const hasChildren = Array.isArray(route.children) && route.children.length > 0
+    if (hasChildren) {
+      const p = path.join(basePath, route.path)
+      results.push(p)
+      getSubmenuIndexList(results, route.children, p)
+    }
+  })
+}
+
 export default {
   components: {
     MenuItem: () => import('./MenuItem')
@@ -26,6 +39,19 @@ export default {
     route: {
       type: Object,
       required: true
+    }
+  },
+  data () {
+    return {
+      submenuIndexList: []
+    }
+  },
+  watch: {
+    route: {
+      handler: function (val) {
+        getSubmenuIndexList(this.submenuIndexList, val.children, val.path)
+      },
+      immediate: true
     }
   },
   methods: {
