@@ -34,8 +34,11 @@ export default {
 .lay-main {
   flex: 1;
   background: #f7f8fa;
+  overflow: auto;
 }
 .lay-header {
+  // position: sticky;
+  // top: 0;
 }
 .lay-body {
   padding: 20px;
