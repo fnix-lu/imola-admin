@@ -89,6 +89,9 @@ export default {
     },
 
     onMenuItemEnter (route) {
+      if (route.path === this.activeMenuRoute.path) {
+        return this.hoverMenuRoute = null
+      }
       this.hoverMenuRoute = route
     },
     onMenuItemLeave () {
