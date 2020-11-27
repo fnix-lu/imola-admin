@@ -33,12 +33,11 @@
 
     <!-- 二级 hover 展示 -->
     <aside-sub-view
-      style="background:#cff"
       :route="hoverMenuRoute"
       fixed
       @mouseenter.native="onHoverSideEnter"
       @mouseleave.native="onHoverSideLeave"
-      v-if="hoverSideVisible && hoverMenuRoute"
+      v-if="(isOnMenu || isOnHoverSide) && hoverMenuRoute"
     />
   </div>
 </template>
@@ -78,14 +77,15 @@ export default {
     },
 
     onMenuEnter () {
-      this.hoverSideVisible = true
       this.isOnMenu = true
     },
     onMenuLeave () {
-      this.isOnMenu = false
-      if (!this.isOnMenu && !this.isOnHoverSide) {
-        this.hoverSideVisible = false
-      }
+      setTimeout(() => {
+        this.isOnMenu = false
+        if (!this.isOnHoverSide) {
+          this.hoverMenuRoute = null
+        }
+      }, 0)
     },
 
     onMenuItemEnter (route) {
@@ -98,10 +98,12 @@ export default {
       this.isOnHoverSide = true
     },
     onHoverSideLeave () {
-      this.isOnHoverSide = false
-      if (!this.isOnMenu && !this.isOnHoverSide) {
-        this.hoverSideVisible = false
-      }
+      setTimeout(() => {
+        this.isOnHoverSide = false
+        if (!this.isOnMenu) {
+          this.hoverMenuRoute = null
+        }
+      }, 0)
     }
   }
 }

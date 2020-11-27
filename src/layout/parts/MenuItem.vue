@@ -10,7 +10,7 @@
       />
     </el-submenu>
 
-    <el-menu-item v-else :index="routePath">
+    <el-menu-item v-else :index="routePath" :class="{ 'is-active': routePath === $route.path }">
       <span>{{ route.meta.title }}</span>
     </el-menu-item>
   </div>

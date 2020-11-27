@@ -4,7 +4,7 @@
 
     <!-- 二级菜单 -->
     <el-scrollbar class="sub-menu">
-      <el-menu :default-active="activeMenuIndex" @select="onMenuSelect">
+      <el-menu @select="onMenuSelect">
         <menu-item
           v-for="child in route.children"
           :key="child.path"
@@ -26,11 +26,6 @@ export default {
     route: {
       type: Object,
       required: true
-    }
-  },
-  computed: {
-    activeMenuIndex () {
-      return this.$route.path
     }
   },
   methods: {
